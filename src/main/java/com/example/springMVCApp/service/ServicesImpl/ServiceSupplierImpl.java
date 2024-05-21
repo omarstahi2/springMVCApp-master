@@ -25,9 +25,9 @@ public class ServiceSupplierImpl implements IServiceSupplier {
 
     @Override
     public void removeSupplier(Integer id) {
-        Optional<Supplier> p = supplierRepository.findById(id);
-        if(p.isEmpty()) throw new RuntimeException("Supplier not found");
-        else supplierRepository.deleteById(id);
+        Supplier supplier = supplierRepository.findById(id).orElseThrow(() -> new RuntimeException("Supplier not found"));
+        supplier.setDeleted(true);
+        supplierRepository.save(supplier);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class ServiceSupplierImpl implements IServiceSupplier {
 
     @Override
     public List<Supplier> listSuppliers() {
-        return supplierRepository.findAll();
+        return supplierRepository.findAllActiveSuppliers();
     }
 
     @Override
     public Page<Supplier> listSuppliers(int numPage) {
-        return supplierRepository.findAll(PageRequest.of(numPage, 3));
+        return supplierRepository.findAllActive(PageRequest.of(numPage, 3));
     }
 
     @Override

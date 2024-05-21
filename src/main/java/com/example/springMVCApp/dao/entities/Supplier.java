@@ -33,4 +33,5 @@ public class Supplier {
     private String email;
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private List<Product> products;
+    private boolean deleted = false; // Soft delete flag
 }

@@ -34,7 +34,7 @@ public class ClientControler {
         model.addAttribute("totalPages", clientsPage.getTotalPages());
         model.addAttribute("listClients", clientsPage.getContent());
         model.addAttribute("name", name);
-        return "client/ClientsList"; // This should be the view name
+        return "client/ClientsList";
     }
 
 

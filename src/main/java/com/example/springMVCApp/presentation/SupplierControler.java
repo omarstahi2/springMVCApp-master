@@ -1,5 +1,6 @@
 package com.example.springMVCApp.presentation;
 
+import com.example.springMVCApp.dao.entities.Client;
 import com.example.springMVCApp.dao.entities.Supplier;
 import com.example.springMVCApp.service.IServices.IServiceSupplier;
 import jakarta.validation.Valid;
@@ -24,15 +25,16 @@ public class SupplierControler {
     public String getListSuppliers(@RequestParam(value = "name", required = false) String name,
                                    @RequestParam(defaultValue = "0") int numPage,
                                    Model model) {
-        Page<Supplier> suppliers;
+        Page<Supplier> suppliersPage;
         if (name != null && !name.isEmpty()) {
-            suppliers = serviceSupplier.searchSuppliersByName(name, numPage);
+            suppliersPage = serviceSupplier.searchSuppliersByName(name, numPage);
         } else {
-            suppliers = serviceSupplier.listSuppliers(numPage);
+            suppliersPage = serviceSupplier.listSuppliers(numPage);
         }
+
         model.addAttribute("currentPage", numPage);
-        model.addAttribute("totalPages", suppliers.getTotalPages());
-        model.addAttribute("listSuppliers", suppliers.getContent());
+        model.addAttribute("totalPages", suppliersPage.getTotalPages());
+        model.addAttribute("listSuppliers", suppliersPage.getContent());
         model.addAttribute("name", name);
         return "supplier/SuppliersList";
     }
