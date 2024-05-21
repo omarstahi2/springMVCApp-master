@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:replace="fragment/sidebar :: sidebar"></div>
+<div class="container">
+    <h1>Add Product</h1>
+    <form method="post" th:action="@{/insertProduct}" th:object="${product}">
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea class="form-control" id="description" th:field="*{description}" rows="3" required></textarea>
+            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></div>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" step="0.01" class="form-control" id="price" th:field="*{price}" required>
+            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></div>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity:</label>
+            <input type="number" step="1" class="form-control" id="quantity" th:field="*{quantity}" required>
+            <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger"></div>
+        </div>
+        <div class="mb-3">
+            <label for="supplier" class="form-label">Supplier:</label>
+            <select id="supplier" name="supplier.id" class="form-select" th:field="*{supplier.id}" required>
+                <option value="" disabled>Select a supplier</option>
+                <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.firstName + ' ' + supplier.lastName}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('supplier.id')}" th:errors="*{supplier.id}" class="text-danger"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

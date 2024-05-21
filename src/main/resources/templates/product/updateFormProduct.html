@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <meta charset="ISO-8859-1">
+    <title>Update form</title>
+</head>
+<body>
+<div th:replace="fragment/sidebar :: sidebar"></div>
+<div class="container">
+    <form method="post" th:action="@{/updateProduct}" th:object="${product}">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" th:value="*{name}" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea class="form-control" id="description" th:field="*{description}" th:text="*{description}" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" step="0.01" class="form-control" id="price" th:field="*{price}" th:value="*{price}" required>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity:</label>
+            <input type="number" step="1" class="form-control" id="quantity" th:field="*{quantity}" th:value="*{quantity}" required>
+        </div>
+        <div class="mb-3">
+            <label for="supplier" class="form-label">Supplier:</label>
+            <select id="supplier" name="supplier.id" class="form-select" th:field="*{supplier.id}" required>
+                <option value="" disabled>Select a supplier</option>
+                <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.firstName + ' ' + supplier.lastName}" th:selected="${supplier.id} == *{supplier.id}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+</body>
+</html>

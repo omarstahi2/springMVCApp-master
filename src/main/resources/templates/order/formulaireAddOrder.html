@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <meta charset="ISO-8859-1">
+    <title>Add an Order</title>
+</head>
+<body>
+<div th:replace="fragment/sidebar :: sidebar"></div>
+<div class="container">
+    <h1>Add an Order</h1>
+    <form method="post" th:action="@{/insertOrder}" th:object="${order}">
+        <div class="mb-3">
+            <label for="client" class="form-label">Client:</label>
+            <select id="client" name="client.id" class="form-select" th:field="*{client.id}" required>
+                <option value="" disabled selected>Select a client</option>
+                <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.firstName + ' ' + client.lastName}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date:</label>
+            <input type="date" class="form-control" id="date" th:field="*{date}" required>
+        </div>
+        <div class="mb-3">
+            <label for="status" class="form-label">Status:</label>
+            <input type="checkbox" id="status" th:field="*{status}">
+        </div>
+        <div class="mb-3">
+            <label for="product" class="form-label">Product:</label>
+            <select id="product" name="product.id" class="form-select" th:field="*{product.id}" required>
+                <option value="" disabled selected>Select a product</option>
+                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity:</label>
+            <input type="number" step="1" class="form-control" id="quantity" th:field="*{quantity}" required>
+            <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger"></div>
+        </div>
+        <div th:if="${errorMessage}" class="text-danger mb-3">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
