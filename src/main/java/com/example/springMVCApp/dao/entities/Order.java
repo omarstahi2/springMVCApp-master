@@ -22,7 +22,6 @@ public class Order {
     private Client client;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
-    private boolean status;
     @ManyToOne
     private Product product;
     private double total_amount;

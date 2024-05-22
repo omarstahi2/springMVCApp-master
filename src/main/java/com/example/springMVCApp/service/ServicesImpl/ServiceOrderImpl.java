@@ -21,50 +21,51 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Transactional
 public class ServiceOrderImpl implements IServiceOrder {
-    private final IOrderRepository or;
+    private final IOrderRepository orderRepository;
 
     @Override
-    public void addOrder(Order o) {
-        or.save(o);
+    public void addOrder(Order order) {
+        order.setDate(LocalDate.now());
+        orderRepository.save(order);
     }
 
     @Override
     public void removeOrder(Integer id) {
-        Optional<Order> p = or.findById(id);
+        Optional<Order> p = orderRepository.findById(id);
         if(p.isEmpty()) throw new RuntimeException("Order not found");
-        else or.deleteById(id);
+        else orderRepository.deleteById(id);
     }
 
     @Override
-    public void updateOrder(Order o) {
-        or.save(o);
+    public void updateOrder(Order order) {
+        orderRepository.save(order);
 
     }
 
     @Override
     public Order searchOrder(Integer id) {
-        Optional<Order> c = or.findById(id);
+        Optional<Order> c = orderRepository.findById(id);
         if(c.isEmpty()) throw new RuntimeException("Product not found");
         else return c.get();
     }
 
     @Override
     public List<Order> listOrders() {
-        return or.findAll();
+        return orderRepository.findAll();
     }
 
     @Override
     public Page<Order> listOrders(int numPage) {
-        return or.findAll(PageRequest.of(numPage, 3));
+        return orderRepository.findAll(PageRequest.of(numPage, 3));
     }
 
     @Override
     public void removeOrdersByProductId(Integer productId) {
-        or.deleteByProductId(productId);
+        orderRepository.deleteByProductId(productId);
     }
 
     public double getTotalSales() {
-        return or.findAll()
+        return orderRepository.findAll()
                 .stream()
                 .mapToDouble(Order::getTotal_amount)
                 .sum();
@@ -72,7 +73,7 @@ public class ServiceOrderImpl implements IServiceOrder {
 
     public double getTotalSalesLastWeek() {
         LocalDate oneWeekAgo = LocalDate.now().minus(1, ChronoUnit.WEEKS);
-        return or.findAll()
+        return orderRepository.findAll()
                 .stream()
                 .filter(order -> order.getDate().isAfter(oneWeekAgo))
                 .mapToDouble(Order::getTotal_amount)
@@ -81,7 +82,7 @@ public class ServiceOrderImpl implements IServiceOrder {
 
     public double getTotalSalesLastMonth() {
         LocalDate oneMonthAgo = LocalDate.now().minus(1, ChronoUnit.MONTHS);
-        return or.findAll()
+        return orderRepository.findAll()
                 .stream()
                 .filter(order -> order.getDate().isAfter(oneMonthAgo))
                 .mapToDouble(Order::getTotal_amount)
@@ -90,7 +91,7 @@ public class ServiceOrderImpl implements IServiceOrder {
 
     @Override
     public List<Order> getRecentOrders() {
-        return or.findAll()
+        return orderRepository.findAll()
                 .stream()
                 .sorted((o1, o2) -> o2.getDate().compareTo(o1.getDate()))
                 .limit(5)
@@ -99,7 +100,7 @@ public class ServiceOrderImpl implements IServiceOrder {
 
     @Override
     public List<Product> getMostOrderedProducts() {
-        return or.findAll()
+        return orderRepository.findAll()
                 .stream()
                 .collect(Collectors.groupingBy(Order::getProduct, Collectors.summingInt(Order::getQuantity)))
                 .entrySet()
@@ -112,7 +113,7 @@ public class ServiceOrderImpl implements IServiceOrder {
 
     @Override
     public List<Client> getBestClients() {
-        return or.findAll()
+        return orderRepository.findAll()
                 .stream()
                 .collect(Collectors.groupingBy(Order::getClient, Collectors.summingDouble(Order::getTotal_amount)))
                 .entrySet()

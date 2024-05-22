@@ -19,14 +19,6 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="date" class="form-label">Date:</label>
-            <input type="date" class="form-control" id="date" th:field="*{date}" required>
-        </div>
-        <div class="mb-3">
-            <label for="status" class="form-label">Status:</label>
-            <input type="checkbox" id="status" th:field="*{status}">
-        </div>
-        <div class="mb-3">
             <label for="product" class="form-label">Product:</label>
             <select id="product" name="product.id" class="form-select" th:field="*{product.id}" required>
                 <option value="" disabled selected>Select a product</option>
