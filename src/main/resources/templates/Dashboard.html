@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dashboard</title>
 </head>
 <body>
+<h1>Dashboard</h1>
+
+<h2>Low Stock Products</h2>
+<ul>
+    <th:block th:each="product : ${lowStockProducts}">
+        <li th:text="${product.name} + ' - ' + ${product.quantity}"></li>
+    </th:block>
+</ul>
+
+<h2>Recent Orders</h2>
+<ul>
+    <th:block th:each="order : ${recentOrders}">
+        <li th:text="'Order ID: ' + ${order.id} + ', Client: ' + ${order.client.firstName} + ', Date: ' + ${order.date} + ', Total: ' + ${order.total_amount}"></li>
+    </th:block>
+</ul>
+
+<h2>Best Clients</h2>
+<ul>
+    <th:block th:each="client : ${bestClients}">
+        <li th:text="${client.firstName}"></li>
+    </th:block>
+</ul>
+
+<h2>Total Sales</h2>
+<p th:text="'Total Sales: $' + ${totalSales}"></p>
+<p th:text="'Total Sales Last Week: $' + ${totalSalesLastWeek}"></p>
+<p th:text="'Total Sales Last Month: $' + ${totalSalesLastMonth}"></p>
 
 </body>
 </html>

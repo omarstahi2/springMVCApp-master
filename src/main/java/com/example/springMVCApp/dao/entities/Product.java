@@ -26,7 +26,7 @@ public class Product {
     @Min(value = 0)
     private Double price;
     @NotNull
-    @Min(value = 0)
+    @Min(value = 1)
     private Integer quantity;
     @ManyToOne
     @JoinColumn(name = "supplier_id")

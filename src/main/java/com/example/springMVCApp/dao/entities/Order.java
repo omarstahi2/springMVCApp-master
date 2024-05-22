@@ -26,6 +26,6 @@ public class Order {
     @ManyToOne
     private Product product;
     private double total_amount;
-    @Min(value = 0)
+    @Min(value = 1)
     private int quantity; // Quantity ordered
 }
