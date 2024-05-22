@@ -69,8 +69,8 @@
                 <td th:text="${client.getLastName()}"></td>
                 <td th:text="${client.getAddress()}"></td>
                 <td>
-                    <a class="btn btn-primary btn-sm" th:href="@{'/updateClient/' + ${client.getId()}}">Update</a>
-                    <a class="btn btn-danger btn-sm" th:href="@{'/deleteClient/' + ${client.getId()}}" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a class="btn btn-primary btn-sm" th:href="@{'/updateClient/' + ${client.getId()}}">Update ↻</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{'/deleteClient/' + ${client.getId()}}" onclick="return confirm('Are you sure?')">Delete ✘</a>
                 </td>
             </tr>
             </tbody>

@@ -67,8 +67,9 @@
                 <td th:text="${order.getDate()}"></td>
                 <td th:text="${order.getTotal_amount()}"></td>
                 <td>
-                    <a class="btn btn-primary btn-sm" th:href="@{'/updateOrder/' + ${order.getId()}}">Update</a>
-                    <a class="btn btn-danger btn-sm" th:href="@{'/deleteOrder/' + ${order.getId()}}" onclick="return confirm('Are you sure?')">Delete</a>
+
+                    <a class="btn btn-primary btn-sm" th:href="@{'/updateOrder/' + ${order.getId()}}">Update ↻</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{'/deleteOrder/' + ${order.getId()}}" onclick="return confirm('Are you sure?')">Delete ✘</a>
                 </td>
             </tr>
             </tbody>

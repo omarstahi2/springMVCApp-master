@@ -75,8 +75,8 @@
                 <td th:text="${product.getQuantity()}"></td>
                 <td th:text="${product.supplier.getFirstName() + ' ' + product.supplier.getLastName()}"></td>
                 <td>
-                    <a class="btn btn-primary btn-sm" th:href="@{'/updateProduct/' + ${product.getId()}}">Update</a>
-                    <a class="btn btn-danger btn-sm" th:href="@{'/deleteProduct/' + ${product.getId()}}" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a class="btn btn-primary btn-sm" th:href="@{'/updateProduct/' + ${product.getId()}}">Update ↻</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{'/deleteProduct/' + ${product.getId()}}" onclick="return confirm('Are you sure?')">Delete ✘</a>
                 </td>
             </tr>
             </tbody>
