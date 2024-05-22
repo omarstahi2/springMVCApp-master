@@ -7,7 +7,7 @@
 </head>
 <body>
 <div th:fragment="sidebar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Stock Management App</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,16 +19,16 @@
                         <a class="nav-link active" aria-current="page" th:href="@{/dashboard}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/listOrders}">Orders</a>
+                        <a class="nav-link active" th:href="@{/listOrders}">Orders</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/listClients}">Clients</a>
+                        <a class="nav-link active" th:href="@{/listClients}">Clients</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/listProducts}">Products</a>
+                        <a class="nav-link active" th:href="@{/listProducts}">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/listSuppliers}">Suppliers</a>
+                        <a class="nav-link active" th:href="@{/listSuppliers}">Suppliers</a>
                     </li>
                 </ul>
             </div>

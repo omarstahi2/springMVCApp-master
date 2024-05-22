@@ -2,63 +2,96 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Products list</title>
+    <title>Products List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
         .table thead th {
             background-color: #007bff;
             color: white;
+        }
+        .header {
+            margin-bottom: 30px;
+        }
+        .pagination {
+            justify-content: center;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .table-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .add-product-btn {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 <div th:replace="fragment/sidebar :: sidebar"></div>
 <div class="container">
-    <form method="get" action="/listProducts">
-        <div class="input-group mb-3">
+    <div class="header">
+        <h1 class="text-center">Products List</h1>
+    </div>
+    <form method="get" action="/listProducts" class="search-bar">
+        <div class="input-group">
             <input type="text" class="form-control" placeholder="Search by name" name="name" value="">
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </form>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col">Supplier</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${listProducts}">
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.getName()}"></td>
-            <td th:text="${product.getDescription()}"></td>
-            <td th:text="${product.getPrice()}"></td>
-            <td th:text="${product.getQuantity()}"></td>
-            <td th:text="${product.supplier.getFirstName() + ' ' + product.supplier.getLastName()}"></td>
-            <td>
-                <a class="btn btn-primary" th:href="@{'/updateProduct/' + ${product.getId()}}">Update</a>
-                <a class="btn btn-danger" th:href="@{'/deleteProduct/' + ${product.getId()}}" onclick="return confirm('Are you sure?')">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link" th:href="@{/listProducts(numPage=${currentPage>0?currentPage-1:0})}">Previous</a></li>
-            <li class="page-item"><a class="page-link" th:text="${currentPage}" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" th:href="@{/listProducts(numPage=${currentPage<totalPages-1?currentPage+1:totalPages-1})}">Next</a></li>
-        </ul>
-    </nav>
+    <div class="table-container">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${listProducts}">
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.getName()}"></td>
+                <td th:text="${product.getDescription()}"></td>
+                <td th:text="${product.getPrice()}"></td>
+                <td th:text="${product.getQuantity()}"></td>
+                <td th:text="${product.supplier.getFirstName() + ' ' + product.supplier.getLastName()}"></td>
+                <td>
+                    <a class="btn btn-primary btn-sm" th:href="@{'/updateProduct/' + ${product.getId()}}">Update</a>
+                    <a class="btn btn-danger btn-sm" th:href="@{'/deleteProduct/' + ${product.getId()}}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" th:href="@{/listProducts(numPage=${currentPage>0?currentPage-1:0})}">Previous</a></li>
+                <li class="page-item"><a class="page-link" th:text="${currentPage + 1}" href="#"></a></li>
+                <li class="page-item"><a class="page-link" th:href="@{/listProducts(numPage=${currentPage<totalPages-1?currentPage+1:totalPages-1})}">Next</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="text-center add-product-btn">
+        <a class="btn btn-primary" th:href="@{/formAddProduct}">Add Product</a>
+    </div>
 </div>
-<div class="container">
-    <a class="btn btn-primary" th:href="@{/formAddProduct}">Add Product</a>
-</div>
-
 </body>
 </html>
