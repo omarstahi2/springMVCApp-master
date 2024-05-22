@@ -1,40 +1,114 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <style>
+        .table thead th {
+            background-color: #007bff;
+            color: white;
+        }
+        .total-sales {
+            background-color: #f8f9fa;
+            border-top: 2px solid #007bff;
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .total-sales h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .total-sales p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .total-sales .icon {
+            font-size: 2em;
+            margin-right: 10px;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="fragment/sidebar :: sidebar"></div>
-<h1>Dashboard</h1>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Low Stock Products</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Quantity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${lowStockProducts}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.quantity}"></td>
+                </tr>
+                </tbody>
+            </table>
 
-<h2>Low Stock Products</h2>
-<ul>
-    <th:block th:each="product : ${lowStockProducts}">
-        <li th:text="${product.name} + ' - ' + ${product.quantity}"></li>
-    </th:block>
-</ul>
+            <h2>Best Clients</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="client : ${bestClients}">
+                    <td th:text="${client.id}"></td>
+                    <td th:text="${client.firstName}"></td>
+                    <td th:text="${client.lastName}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-<h2>Recent Orders</h2>
-<ul>
-    <th:block th:each="order : ${recentOrders}">
-        <li th:text="'Order ID: ' + ${order.id} + ', Client: ' + ${order.client.firstName} + ', Date: ' + ${order.date} + ', Total: ' + ${order.total_amount}"></li>
-    </th:block>
-</ul>
+        <div class="col-md-6">
+            <h2>Recent Orders</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Client</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Total Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${recentOrders}">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.client.firstName + ' ' + order.client.lastName}"></td>
+                    <td th:text="${order.date}"></td>
+                    <td th:text="${order.total_amount}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-<h2>Best Clients</h2>
-<ul>
-    <th:block th:each="client : ${bestClients}">
-        <li th:text="${client.firstName}"></li>
-    </th:block>
-</ul>
+<div class="total-sales">
+    <div class="container">
+        <h2>Total Sales</h2>
+        <p><span class="icon">💰</span><span th:text="'Total Sales: $' + ${totalSales}"></span></p>
+        <p><span class="icon">📅</span><span th:text="'Total Sales Last Week: $' + ${totalSalesLastWeek}"></span></p>
+        <p><span class="icon">🗓️</span><span th:text="'Total Sales Last Month: $' + ${totalSalesLastMonth}"></span></p>
+    </div>
+</div>
 
-<h2>Total Sales</h2>
-<p th:text="'Total Sales: $' + ${totalSales}"></p>
-<p th:text="'Total Sales Last Week: $' + ${totalSalesLastWeek}"></p>
-<p th:text="'Total Sales Last Month: $' + ${totalSalesLastMonth}"></p>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
