@@ -1,6 +1,5 @@
 package com.example.springMVCApp.presentation;
 
-import com.example.springMVCApp.dao.entities.Client;
 import com.example.springMVCApp.dao.entities.Supplier;
 import com.example.springMVCApp.service.IServices.IServiceSupplier;
 import jakarta.validation.Valid;

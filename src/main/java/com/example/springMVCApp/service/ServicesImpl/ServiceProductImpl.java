@@ -1,6 +1,5 @@
 package com.example.springMVCApp.service.ServicesImpl;
 
-import com.example.springMVCApp.dao.entities.Client;
 import com.example.springMVCApp.dao.entities.Product;
 import com.example.springMVCApp.dao.repositories.IProductRepository;
 import com.example.springMVCApp.service.IServices.IServiceProduct;

@@ -1,6 +1,5 @@
 package com.example.springMVCApp.dao.repositories;
 
-import com.example.springMVCApp.dao.entities.Client;
 import com.example.springMVCApp.dao.entities.Supplier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
