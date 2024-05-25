@@ -16,5 +16,6 @@ public interface ISupplierRepository extends JpaRepository<Supplier, Integer> {
 
     @Query("SELECT s FROM Supplier s WHERE s.deleted = false")
     Page<Supplier> findAllActive(PageRequest pageRequest);
+
     Page<Supplier> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String firstName, String lastName, PageRequest pageRequest);
 }

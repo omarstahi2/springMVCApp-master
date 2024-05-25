@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="ISO-8859-1">
     <title>Update Order</title>
     <style>
@@ -48,30 +51,33 @@
 <div class="container">
     <h1>Update Order</h1>
     <form method="post" th:action="@{/updateOrder}" th:object="${order}">
-        <input type="hidden" th:field="*{id}"/>
+        <input th:field="*{id}" type="hidden"/>
         <div class="mb-3">
-            <label for="client" class="form-label">Client:</label>
-            <select id="client" name="client.id" class="form-select" th:field="*{client.id}">
-                <option value="" disabled>Select a client</option>
-                <option th:each="client : ${clients}" th:value="${client.id}" th:selected="${client.id == order.client.id}" th:text="${client.firstName + ' ' + client.lastName}"></option>
+            <label class="form-label" for="client">Client:</label>
+            <select class="form-select" id="client" name="client.id" th:field="*{client.id}">
+                <option disabled value="">Select a client</option>
+                <option th:each="client : ${clients}" th:selected="${client.id == order.client.id}"
+                        th:text="${client.firstName + ' ' + client.lastName}"
+                        th:value="${client.id}"></option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="date" class="form-label">Date:</label>
-            <input type="date" class="form-control" id="date" name="date" th:field="*{date}">
+            <label class="form-label" for="date">Date:</label>
+            <input class="form-control" id="date" name="date" th:field="*{date}" type="date">
         </div>
         <div class="mb-3">
-            <label for="product" class="form-label">Product:</label>
-            <select id="product" name="product.id" class="form-select" th:field="*{product.id}">
-                <option value="" disabled>Select a product</option>
-                <option th:each="product : ${products}" th:value="${product.id}" th:selected="${product.id == order.product.id}" th:text="${product.name}"></option>
+            <label class="form-label" for="product">Product:</label>
+            <select class="form-select" id="product" name="product.id" th:field="*{product.id}">
+                <option disabled value="">Select a product</option>
+                <option th:each="product : ${products}" th:selected="${product.id == order.product.id}"
+                        th:text="${product.name}" th:value="${product.id}"></option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="quantity" class="form-label">Quantity:</label>
-            <input type="number" step="1" class="form-control" id="quantity" name="quantity" th:field="*{quantity}">
+            <label class="form-label" for="quantity">Quantity:</label>
+            <input class="form-control" id="quantity" name="quantity" step="1" th:field="*{quantity}" type="number">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 </div>
 </body>

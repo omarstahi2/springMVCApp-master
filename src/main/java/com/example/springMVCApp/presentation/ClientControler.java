@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 @AllArgsConstructor
 public class ClientControler {
     private final IServiceClient serviceClient;
+
     @GetMapping("/listClients")
     public String listClients(@RequestParam(value = "name", required = false) String name,
                               @RequestParam(defaultValue = "0") int numPage,
@@ -39,17 +38,16 @@ public class ClientControler {
 
 
     @GetMapping("/formAddClient")
-    public String getFormAdd(Model model){
+    public String getFormAdd(Model model) {
         model.addAttribute("client", new Client());
         return "client/formulaireAddClient";
     }
 
     @PostMapping("/insertClient")
-    public String postInsertClient(@Valid Client c, BindingResult result, Model model){
+    public String postInsertClient(@Valid Client c, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "client/formulaireAddClient";
-        }
-        else{
+        } else {
             serviceClient.addClient(c);
             return "redirect:/listClients";
         }
@@ -74,7 +72,6 @@ public class ClientControler {
         serviceClient.removeClient(id);
         return "redirect:/listClients";
     }
-
 
 
 }

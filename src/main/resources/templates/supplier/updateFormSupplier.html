@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="ISO-8859-1">
     <title>Update form</title>
     <style>
@@ -48,24 +51,24 @@
 <div class="container">
     <h1>Update Supplier</h1>
     <form method="post" th:action="@{/updateSupplier}" th:object="${supplier}">
-        <input type="hidden" th:field="*{id}"/>
+        <input th:field="*{id}" type="hidden"/>
         <div class="mb-3">
-            <label for="fname" class="form-label">First name:</label>
-            <input type="text" class="form-control" id="fname" th:field="*{firstName}">
+            <label class="form-label" for="fname">First name:</label>
+            <input class="form-control" id="fname" th:field="*{firstName}" type="text">
         </div>
         <div class="mb-3">
-            <label for="lname" class="form-label">Last name:</label>
-            <input type="text" class="form-control" id="lname" th:field="*{lastName}">
+            <label class="form-label" for="lname">Last name:</label>
+            <input class="form-control" id="lname" th:field="*{lastName}" type="text">
         </div>
         <div class="mb-3">
-            <label for="email" class="form-label">E-mail:</label>
-            <input type="text" class="form-control" id="email" th:field="*{email}">
+            <label class="form-label" for="email">E-mail:</label>
+            <input class="form-control" id="email" th:field="*{email}" type="text">
         </div>
         <div class="mb-3">
-            <label for="phone" class="form-label">Phone:</label>
-            <input type="text" class="form-control" id="phone" th:field="*{phone}">
+            <label class="form-label" for="phone">Phone:</label>
+            <input class="form-control" id="phone" th:field="*{phone}" type="text">
         </div>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <button class="btn btn-primary" type="submit">Update</button>
     </form>
 </div>
 </body>

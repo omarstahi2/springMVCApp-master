@@ -25,8 +25,8 @@ public class ProductController {
 
     @GetMapping("/listProducts")
     public String getListProduct(@RequestParam(value = "name", required = false) String name,
-                              @RequestParam(defaultValue = "0") int numPage,
-                              Model model) {
+                                 @RequestParam(defaultValue = "0") int numPage,
+                                 Model model) {
         Page<Product> products;
         if (name != null && !name.isEmpty()) {
             products = serviceProduct.searchProductsByName(name, numPage);

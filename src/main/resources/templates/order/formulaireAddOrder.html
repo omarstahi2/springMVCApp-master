@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="ISO-8859-1">
     <title>Add an Order</title>
     <style>
@@ -49,28 +52,29 @@
     <h1>Add an Order</h1>
     <form method="post" th:action="@{/insertOrder}" th:object="${order}">
         <div class="mb-3">
-            <label for="client" class="form-label">Client:</label>
-            <select id="client" name="client.id" class="form-select" th:field="*{client.id}" required>
-                <option value="" disabled selected>Select a client</option>
-                <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.firstName + ' ' + client.lastName}"></option>
+            <label class="form-label" for="client">Client:</label>
+            <select class="form-select" id="client" name="client.id" required th:field="*{client.id}">
+                <option disabled selected value="">Select a client</option>
+                <option th:each="client : ${clients}" th:text="${client.firstName + ' ' + client.lastName}"
+                        th:value="${client.id}"></option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="product" class="form-label">Product:</label>
-            <select id="product" name="product.id" class="form-select" th:field="*{product.id}" required>
-                <option value="" disabled selected>Select a product</option>
-                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+            <label class="form-label" for="product">Product:</label>
+            <select class="form-select" id="product" name="product.id" required th:field="*{product.id}">
+                <option disabled selected value="">Select a product</option>
+                <option th:each="product : ${products}" th:text="${product.name}" th:value="${product.id}"></option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="quantity" class="form-label">Quantity:</label>
-            <input type="number" step="1" class="form-control" id="quantity" th:field="*{quantity}" required>
-            <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger"></div>
+            <label class="form-label" for="quantity">Quantity:</label>
+            <input class="form-control" id="quantity" required step="1" th:field="*{quantity}" type="number">
+            <div class="text-danger" th:errors="*{quantity}" th:if="${#fields.hasErrors('quantity')}"></div>
         </div>
-        <div th:if="${errorMessage}" class="text-danger mb-3">
+        <div class="text-danger mb-3" th:if="${errorMessage}">
             <p th:text="${errorMessage}"></p>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 </div>
 </body>

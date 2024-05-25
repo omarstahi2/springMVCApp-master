@@ -47,34 +47,35 @@
     <h1>Add Product</h1>
     <form method="post" th:action="@{/insertProduct}" th:object="${product}">
         <div class="mb-3">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}" required>
-            <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></div>
+            <label class="form-label" for="name">Name:</label>
+            <input class="form-control" id="name" required th:field="*{name}" type="text">
+            <div class="text-danger" th:errors="*{name}" th:if="${#fields.hasErrors('name')}"></div>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Description:</label>
-            <textarea class="form-control" id="description" th:field="*{description}" rows="3" required></textarea>
-            <div th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-danger"></div>
+            <label class="form-label" for="description">Description:</label>
+            <textarea class="form-control" id="description" required rows="3" th:field="*{description}"></textarea>
+            <div class="text-danger" th:errors="*{description}" th:if="${#fields.hasErrors('description')}"></div>
         </div>
         <div class="mb-3">
-            <label for="price" class="form-label">Price:</label>
-            <input type="number" step="0.01" class="form-control" id="price" th:field="*{price}" required>
-            <div th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="text-danger"></div>
+            <label class="form-label" for="price">Price:</label>
+            <input class="form-control" id="price" required step="0.01" th:field="*{price}" type="number">
+            <div class="text-danger" th:errors="*{price}" th:if="${#fields.hasErrors('price')}"></div>
         </div>
         <div class="mb-3">
-            <label for="quantity" class="form-label">Quantity:</label>
-            <input type="number" step="1" class="form-control" id="quantity" th:field="*{quantity}" required>
-            <div th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" class="text-danger"></div>
+            <label class="form-label" for="quantity">Quantity:</label>
+            <input class="form-control" id="quantity" required step="1" th:field="*{quantity}" type="number">
+            <div class="text-danger" th:errors="*{quantity}" th:if="${#fields.hasErrors('quantity')}"></div>
         </div>
         <div class="mb-3">
-            <label for="supplier" class="form-label">Supplier:</label>
-            <select id="supplier" name="supplier.id" class="form-select" th:field="*{supplier.id}" required>
-                <option value="" disabled>Select a supplier</option>
-                <option th:each="supplier : ${suppliers}" th:value="${supplier.id}" th:text="${supplier.firstName + ' ' + supplier.lastName}"></option>
+            <label class="form-label" for="supplier">Supplier:</label>
+            <select class="form-select" id="supplier" name="supplier.id" required th:field="*{supplier.id}">
+                <option disabled value="">Select a supplier</option>
+                <option th:each="supplier : ${suppliers}" th:text="${supplier.firstName + ' ' + supplier.lastName}"
+                        th:value="${supplier.id}"></option>
             </select>
-            <div th:if="${#fields.hasErrors('supplier.id')}" th:errors="*{supplier.id}" class="text-danger"></div>
+            <div class="text-danger" th:errors="*{supplier.id}" th:if="${#fields.hasErrors('supplier.id')}"></div>
         </div>
-        <button type="submit" class="btn btn-primary">Add Product</button>
+        <button class="btn btn-primary" type="submit">Add Product</button>
     </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class ServiceSupplierImpl implements IServiceSupplier {
     @Override
     public Supplier searchSupplier(Integer id) {
         Optional<Supplier> c = supplierRepository.findById(id);
-        if(c.isEmpty()) throw new RuntimeException("Supplier not found");
+        if (c.isEmpty()) throw new RuntimeException("Supplier not found");
         else return c.get();
     }
 

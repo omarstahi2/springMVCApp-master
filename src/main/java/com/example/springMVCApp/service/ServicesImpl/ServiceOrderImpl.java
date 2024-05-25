@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -32,7 +33,7 @@ public class ServiceOrderImpl implements IServiceOrder {
     @Override
     public void removeOrder(Integer id) {
         Optional<Order> p = orderRepository.findById(id);
-        if(p.isEmpty()) throw new RuntimeException("Order not found");
+        if (p.isEmpty()) throw new RuntimeException("Order not found");
         else orderRepository.deleteById(id);
     }
 
@@ -45,7 +46,7 @@ public class ServiceOrderImpl implements IServiceOrder {
     @Override
     public Order searchOrder(Integer id) {
         Optional<Order> c = orderRepository.findById(id);
-        if(c.isEmpty()) throw new RuntimeException("Product not found");
+        if (c.isEmpty()) throw new RuntimeException("Product not found");
         else return c.get();
     }
 
@@ -72,7 +73,7 @@ public class ServiceOrderImpl implements IServiceOrder {
     }
 
     public double getTotalSalesLastWeek() {
-        LocalDate oneWeekAgo = LocalDate.now().minus(1, ChronoUnit.WEEKS);
+        LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);
         return orderRepository.findAll()
                 .stream()
                 .filter(order -> order.getDate().isAfter(oneWeekAgo))
@@ -81,7 +82,7 @@ public class ServiceOrderImpl implements IServiceOrder {
     }
 
     public double getTotalSalesLastMonth() {
-        LocalDate oneMonthAgo = LocalDate.now().minus(1, ChronoUnit.MONTHS);
+        LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
         return orderRepository.findAll()
                 .stream()
                 .filter(order -> order.getDate().isAfter(oneMonthAgo))
